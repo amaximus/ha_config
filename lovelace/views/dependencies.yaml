@@ -1,0 +1,563 @@
+title: Dependencies
+icon: mdi:file-tree
+id: dependencies
+theme: dark-mode
+path: deps
+type: sidebar
+cards:
+  - type: custom:sankey-chart
+    height: 500
+    layout: horizontal
+    min_box_size: 20
+    show_icons: true
+    show_names: true
+    show_states: false
+    wide: true
+    sections:
+### column 1
+      - entities:
+          - entity_id: sensor.dep_router
+            color: mediumaquamarine
+            url: http://192.168.1.1
+            children:
+              - sensor.dep_hp_thin
+              - sensor.dep_broadlink_rm4c
+              - sensor.dep_tanix
+              - sensor.dep_tv
+              - sensor.dep_hp_printer
+              - sensor.dep_tplink_re3
+              - sensor.dep_broadlink_sp3s
+              - sensor.dep_wemo_d1_2
+              - sensor.dep_broadlink_sp4l
+              - sensor.dep_pana
+              - sensor.dep_gosund_huto
+              - sensor.dep_gosund_mosogato
+              - sensor.dep_tplink_re200
+              - sensor.dep_expertbook_eni
+              - sensor.dep_rpi3
+              - sensor.dep_espsomfyrts
+              - sensor.dep_nas
+              - sensor.dep_camera_street
+              - sensor.dep_hiwatch_hwc_p120
+              - sensor.dep_rpi4
+              - sensor.dep_shelly1_heat
+          - entity_id: sensor.dep_empty
+            color: transparent
+            icon: 'mdi:none'
+          - entity_id: sensor.dep_empty
+            color: transparent
+            icon: 'mdi:none'
+          - entity_id: sensor.dep_empty
+            color: transparent
+            icon: 'mdi:none'
+          - entity_id: sensor.dep_aajh482
+            icon: 'phu:toyota'
+            color_on_state: true
+            color: var(--primary-color)
+            color_above: mediumaquamarine
+            color_limit: 1
+          - entity_id: sensor.dep_empty
+            color: transparent
+            icon: 'mdi:none'
+          - entity_id: sensor.dep_person_eniko
+            color_on_state: true
+            color: var(--primary-color)
+            color_above: mediumaquamarine
+            color_limit: 1
+          - entity_id: sensor.dep_person_reni
+            color_on_state: true
+            color: var(--primary-color)
+            color_above: mediumaquamarine
+            color_limit: 1
+          - entity_id: sensor.dep_person_akos
+            color_on_state: true
+            color: var(--primary-color)
+            color_above: mediumaquamarine
+            color_limit: 1
+          - entity_id: sensor.dep_person_attila
+            color_on_state: true
+            color: var(--primary-color)
+            color_above: mediumaquamarine
+            color_limit: 1
+### column 2
+      - entities:
+          - entity_id: sensor.dep_hp_thin
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 19
+            children:
+              - sensor.dep_zha
+              - sensor.dep_mqtt
+          - entity_id: sensor.dep_broadlink_rm4c
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 1
+            children:
+              - sensor.dep_yamaha_av
+          - entity_id: sensor.dep_tanix
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 1
+            children:
+              - sensor.dep_kodi
+          - entity_id: sensor.dep_tv
+            color_on_state: true
+            color_above: grey
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_limit: 1
+          - entity_id: sensor.dep_hp_printer
+            color_on_state: true
+            color_above: gray
+            color: var(--primary-color)
+            color_limit: 1
+            url: 'http://192.168.1.112'
+          - entity_id: sensor.dep_tplink_re3
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 5
+            url: 'http://192.168.1.58/'
+            children:
+              - sensor.dep_gosund_tarolo
+              - sensor.dep_nodemcu
+              - sensor.dep_tplink_re2
+              - sensor.dep_floureon_camera
+          - entity_id: sensor.dep_broadlink_sp3s
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+          - entity_id: sensor.dep_wemo_d1_2
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 1
+            url: 'http://192.168.1.62'
+            children:
+              - sensor.dep_paradox
+          - entity_id: sensor.dep_broadlink_sp4l
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+            children:
+              - sensor.dep_lenovo_tablet
+          - entity_id: sensor.dep_pana
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+          - entity_id: sensor.dep_gosund_huto
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+            url: 'http://192.168.1.171'
+          - entity_id: sensor.dep_gosund_mosogato
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+            url: 'http://192.168.1.53'
+          - entity_id: sensor.dep_tplink_re200
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 8
+            url: 'http://192.168.1.111'
+            children:
+              - sensor.dep_camera_backyard
+              - sensor.dep_daikin
+              - sensor.dep_pana_a
+              - sensor.dep_pana_r
+              - sensor.dep_gosund_moso
+              - sensor.dep_ps4
+              - sensor.dep_expertbook_akos
+              - sensor.dep_hp_elite
+          - entity_id: sensor.dep_expertbook_eni
+            color_on_state: true
+            color: var(--primary-color)
+            color_above: gray
+            color_limit: 1
+          - entity_id: sensor.dep_rpi3
+            color_on_state: true
+            color: mediumaquamarine
+            color_above: gray
+            color_limit: 1
+          - entity_id: sensor.dep_espsomfyrts
+            color_on_state: true
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 2
+            url: 'http://192.168.1.128'
+            children:
+              - sensor.dep_awning_h
+              - sensor.dep_awning_v
+          - entity_id: sensor.dep_nas
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 2
+            url: 'https://192.168.1.109'
+            children:
+              - sensor.dep_ubooquity
+              - sensor.dep_shinobi
+          - entity_id: sensor.dep_camera_street
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 1
+            children:
+              - sensor.dep_shinobi
+          - entity_id: sensor.dep_hiwatch_hwc_p120
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 1
+            url: 'http://192.168.1.131'
+            children:
+              - sensor.dep_shinobi
+          - entity_id: sensor.dep_rpi4
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 1
+            children:
+              - sensor.dep_shinobi
+          - entity_id: sensor.dep_shelly1_heat
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+            children:
+              - sensor.dep_b3_heat
+### column 3
+      - entities:
+          - entity_id: sensor.dep_zha
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 14
+            url: 'http://192.168.1.32:8123/config/zha/visualization?config_entry=01J93SWXASE98X2T4RRHR5KB68'
+            children:
+              - sensor.dep_sonoff_zigbee
+          - entity_id: sensor.dep_mqtt
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 5
+            children:
+              - sensor.dep_sonoff_rf433
+          - entity_id: sensor.dep_yamaha_av
+            color_on_state: true
+            color_above: red
+            color: gray
+            color_limit: 1
+            children:
+              - sensor.dep_music
+          - entity_id: sensor.dep_kodi
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+            url: 'http://192.168.1.122:8080'
+            children:
+              - sensor.dep_music
+          - entity_id: sensor.dep_gosund_tarolo
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 1
+            url: 'http://192.168.1.54'
+          - entity_id: sensor.dep_nodemcu
+            color_on_state: true
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 2
+            url: 'http://192.168.1.102'
+            children:
+              - sensor.dep_garage_door_sensor
+              - sensor.dep_irrigation
+          - entity_id: sensor.dep_tplink_re2
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 1
+            url: 'http://192.168.1.117'
+            children:
+              - sensor.dep_shelly1_lifting
+          - entity_id: sensor.dep_floureon_camera
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 1
+            url: 'http://192.168.1.113'
+            children:
+              - sensor.dep_shinobi
+          - entity_id: sensor.dep_paradox
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+          - entity_id: sensor.dep_lenovo_tablet
+            color_on_state: true
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+          - entity_id: sensor.dep_daikin
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+          - entity_id: sensor.dep_pana_a
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+          - entity_id: sensor.dep_pana_r
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+          - entity_id: sensor.dep_gosund_moso
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+            url: 'http://192.168.1.71'
+          - entity_id: sensor.dep_camera_backyard
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 1
+            children:
+              - sensor.dep_shinobi
+          - entity_id: sensor.dep_ps4
+            color_on_state: true
+            color: var(--primary-color)
+            color_above: gray
+            color_limit: 1
+          - entity_id: sensor.dep_expertbook_akos
+            color_on_state: true
+            color: var(--primary-color)
+            color_above: gray
+            color_limit: 1
+          - entity_id: sensor.dep_hp_elite
+            color_on_state: true
+            color: var(--primary-color)
+            color_above: mediumaquamarine
+            color_limit: 1
+          - entity_id: sensor.dep_awning_h
+            color_on_state: true
+            color: mediumaquamarine
+            color_above: var(--primary-color)
+            color_limit: 1
+          - entity_id: sensor.dep_awning_v
+            color_on_state: true
+            color: mediumaquamarine
+            color_above: var(--primary-color)
+            color_limit: 1
+          - entity_id: sensor.dep_ubooquity
+            color_on_state: true
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 1
+            url: 'http://192.168.1.109:2202/'
+### column 4
+      - entities:
+          - entity_id: sensor.dep_sonoff_zigbee
+            color_on_state: true
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 14
+            url: 'http://192.168.1.51'
+            children:
+              - sensor.dep_zbth_akos
+              - sensor.dep_zbdw_akos
+              - sensor.dep_zbso_akos
+              - sensor.dep_zbth_bed
+              - sensor.dep_zbdw_bed
+              - sensor.dep_zbth_living
+              - sensor.dep_zbdw_living
+              - sensor.dep_zbth_reni
+              - sensor.dep_zbdw_reni
+              - sensor.dep_zbso_reni
+              - sensor.dep_zbso_tretakt
+              - sensor.dep_zbwl_bath0
+              - sensor.dep_zbwl_bath1
+              - sensor.dep_zbwl_badring1
+              #- sensor.dep_zbmo_safe
+              #- sensor.dep_zbmo_tablet
+          - entity_id: sensor.dep_sonoff_rf433
+            color_on_state: true
+            color: mediumaquamarine
+            color_above: red
+            color_limit: 5
+            url: 'http://192.168.1.132'
+            children:
+              - sensor.dep_blinds
+              - sensor.dep_reluxa
+              - sensor.dep_garage_door
+              - sensor.dep_smoke_detector0
+              - sensor.dep_smoke_detector1
+              #- sensor.dep_living_motion
+              #- sensor.dep_heat_control
+          - entity_id: sensor.dep_music
+            color_on_state: true
+            color_below: rgb(3,138,255)
+            color: mediumaquamarine
+            color_above: gray
+            color_limit: 1.9
+          - entity_id: sensor.dep_garage_door_sensor
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_limit: 1
+          - entity_id: sensor.dep_irrigation
+            color_on_state: true
+            color_below: rgb(3,138,255)
+            color: gray
+            color_limit: 1
+          - entity_id: sensor.dep_shelly1_lifting
+            color_on_state: true
+            color_below: red
+            color: mediumaquamarine
+            color_above: rgb(3,138,255)
+            color_limit: 1
+            children:
+              - sensor.dep_lifting_pump
+          - entity_id: sensor.dep_shinobi
+            color_on_state: true
+            color_above: red
+            color: mediumaquamarine
+            color_limit: 6
+            url: 'http://192.168.1.125:8080'
+### column 5
+      - entities:
+          - entity_id: sensor.dep_zbth_akos
+            color: mediumaquamarine
+            children:
+              - sensor.dep_b3_heat
+          - entity_id: sensor.dep_zbdw_akos
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_limit: 1
+            children:
+              - sensor.dep_b3_heat
+          - entity_id: sensor.dep_zbth_bed
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            children:
+              - sensor.dep_b3_heat
+          - entity_id: sensor.dep_zbdw_bed
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_limit: 1
+            children:
+              - sensor.dep_b3_heat
+          - entity_id: sensor.dep_zbth_living
+            color: mediumaquamarine
+            children:
+              - sensor.dep_b3_heat
+          - entity_id: sensor.dep_zbdw_living
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_limit: 1
+            children:
+              - sensor.dep_b3_heat
+          - entity_id: sensor.dep_zbth_reni
+            color: mediumaquamarine
+            children:
+              - sensor.dep_b3_heat
+          - entity_id: sensor.dep_zbdw_reni
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+            color_limit: 1
+            children:
+              - sensor.dep_b3_heat
+          - entity_id: sensor.dep_zbso_akos
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+          - entity_id: sensor.dep_zbso_reni
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+          - entity_id: sensor.dep_zbso_tretakt
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+          - entity_id: sensor.dep_zbwl_bath0
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+          - entity_id: sensor.dep_zbwl_bath1
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+          - entity_id: sensor.dep_zbwl_badring1
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+#          - entity_id: sensor.dep_zbmo_safe
+#            color: mediumaquamarine
+          - entity_id: sensor.dep_blinds
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+          - entity_id: sensor.dep_reluxa
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+          - entity_id: sensor.dep_garage_door
+            color: mediumaquamarine
+          - entity_id: sensor.dep_smoke_detector0
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+          - entity_id: sensor.dep_smoke_detector1
+            color_on_state: true
+            color_below: var(--primary-color)
+            color: mediumaquamarine
+          - entity_id: sensor.dep_lifting_pump
+            color_on_state: true
+            color_below: red
+            color: mediumaquamarine
+            color_limit: 1
+### column 6
+      - entities:
+          - entity_id: sensor.dep_b3_heat
+            color_on_state: true
+            color_above: rgb(3,138,255)
+            color: mediumaquamarine
+            color_limit: 9
+    card_mod:
+      style: |
+        ha-card .box.type-entity div.label span.name a {
+          color: var(--paper-item-icon-color);
+          position: sticky;
+          z-index: 100;
+        }

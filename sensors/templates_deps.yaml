@@ -1,0 +1,491 @@
+platform: template
+### dependency server's values
+# entity_id.state = sum_of_sattes_of_its_children -> state is ok
+# entity_id.state = ok_state + 0.1 -> state is NOT ok
+# - this way the failing state will not cause the branches to disappear
+# - leaves have state=1
+# General values:
+# - x.1 : unavailble
+# - x : available
+# - (x-1).9 : available and on/open/playing/etc
+sensors:
+  dep_router:
+    friendly_name: router
+    value_template: "52"
+    icon_template: mdi:router-network-wireless
+
+  dep_empty:
+    friendly_name: ''
+    value_template: "17"
+    icon_template: ''
+
+  dep_mqtt:
+    friendly_name: MQTT
+    value_template: "{% if states('sensor.mqtt')|int > 0 %}5{% else %}5.1{%endif %}"
+    icon_template: mdi:message-processing-outline
+  dep_zha:
+    friendly_name: ZHA
+    value_template: "14"
+    icon_template: mdi:home-assistant
+  dep_nas:
+    friendly_name: NAS
+    value_template: >
+      {% if is_state('device_tracker.nas','home') %}
+         2
+      {% else %}
+         2.1
+      {% endif %}
+    icon_template: mdi:nas
+  dep_ubooquity:
+    friendly_name: Ubooquity
+    value_template: >
+      {% if is_state('sensor.ubooquity','200_0') %}
+         1
+      {% else %}
+         1.1
+      {% endif %}
+    icon_template: mdi:book-open-page-variant-outline
+
+  dep_broadlink_sp3s:
+    friendly_name: SP3S sütő
+    value_template: >
+      {% if is_state('device_tracker.broadlink_sp3s','home') %}
+         {% if states('sensor.sp3s_current_power')|int > 5 %}
+            0.9
+         {% else %}
+            1
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:power-socket-eu
+  dep_broadlink_sp4l:
+    friendly_name: SP4L
+    value_template: >
+      {% if is_state('device_tracker.broadlink_sp4l','home') %}
+         {% if is_state('switch.sp4l_switch','on') %}
+            0.9
+         {% else %}
+            1
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:power-socket-eu
+  dep_lenovo_tablet:
+    friendly_name: tablet
+    value_template: "{% if is_state('device_tracker.lenovo_tablet','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:tablet
+  dep_hp_printer: # Photosmart B110a
+    friendly_name: HP nyomtató
+    value_template: "{% if is_state('device_tracker.hp_printer','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:printer
+
+  dep_sonoff_rf433:
+    friendly_name: RF433
+    value_template: "{% if is_state('device_tracker.sonoff_rf433','home') %}5{% else %}5.1{%endif %}"
+    icon_template: mdi:radio-tower
+  dep_blinds:
+    friendly_name: zsaluzia
+    value_template: "{% if is_state('cover.blinds','open') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:window-shutter
+  dep_reluxa:
+    friendly_name: redöny
+    value_template: "{% if is_state('cover.reluxa','open') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:window-shutter
+  dep_garage_door:
+    friendly_name: garázsajtó
+    value_template: "1"
+    icon_template: mdi:garage
+  dep_smoke_detector0:
+    friendly_name: füstérzékelő0
+    value_template: "{% if is_state('input_boolean.smoke_detector0_alerted','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:smoke-detector
+  dep_smoke_detector1:
+    friendly_name: füstérzékelő1
+    value_template: "{% if is_state('input_boolean.smoke_detector1_alerted','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:smoke-detector
+  dep_living_motion:
+    friendly_name: nappali
+    value_template: "1"
+    icon_template: mdi:walk
+### Used by RF433 heat control; deprecated
+#  dep_heat_control:
+#    friendly_name: Fűtésvezérlés
+#    value_template: "1"
+#    icon_template: mdi:thermostat-box
+  # garage
+  dep_tplink_re2:
+    friendly_name: TL RE2
+    value_template: "{% if is_state('device_tracker.tplink_re2','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:wifi
+  # floor 1
+  dep_tplink_re200:
+    friendly_name: TL RE200
+    value_template: "{% if is_state('device_tracker.tplink_re200','home') %}8{% else %}8.1{%endif %}"
+    icon_template: mdi:wifi
+  dep_hp_250g2:
+    friendly_name: HP 250G2
+    value_template: "{% if is_state('device_tracker.hp_250g2','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:laptop
+  dep_expertbook_akos:
+    friendly_name: Asus ExpertBook Akos
+    value_template: "{% if is_state('device_tracker.expertbook_akos','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:laptop
+  dep_hp_elite:
+    friendly_name: HP EliteBook
+    value_template: "{% if is_state('device_tracker.e_5cg2214bx1_1','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:laptop
+
+  # container
+  dep_tplink_re3:
+    friendly_name: TL RE3
+    value_template: "{% if is_state('device_tracker.tplink_re3','home') %}5{% else %}5.1{%endif %}"
+    icon_template: mdi:wifi
+
+  dep_nodemcu:
+    friendly_name: NodeMCU
+    value_template: "{% if is_state('device_tracker.nodemcu','home') %}2{% else %}2.1{%endif %}"
+    icon_template: mdi:memory
+  dep_garage_door_sensor:
+    friendly_name: DW garázs
+    value_template: "{% if is_state('binary_sensor.garage_door','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:leak
+  dep_irrigation:
+    friendly_name: öntözés
+    value_template: "{% if is_state('binary_sensor.irrigation_control','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:sprinkler-variant
+  dep_wemo_d1_1:
+    friendly_name: Wemo1
+    value_template: "{% if is_state('device_tracker.wemo_d1_1','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:memory
+  dep_shelly1_lifting:
+    friendly_name: Shelly1 átemelő
+    value_template: >
+      {% if is_state('device_tracker.shelly1_lifting','home') %}
+         {% if is_state('switch.shelly1_lifting','off') %}
+            0.9
+         {% else %}
+            1
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:memory
+  dep_lifting_pump:
+    friendly_name: átemelőszivattyú
+    value_template: >
+      {% if is_state('switch.shelly1_lifting','off') %}
+         0.9
+      {% else %}
+         1
+      {% endif %}
+    icon_template: mdi:pump
+  dep_espsomfyrts:
+    friendly_name: ESP Somfy
+    value_template: "{% if is_state('device_tracker.espsomfyrts','home') %}2{% else %}2.1{% endif %}"
+    icon_template: phu:esphome-new
+  dep_awning_h:
+    friendly_name: napellenző H
+    value_template: "{% if is_state('cover.awningh','closed') %}1{% else %}1.1{% endif %}"
+    icon_template: mdi:awning
+  dep_awning_v:
+    friendly_name: napellenző V
+    value_template: "{% if is_state('cover.awningv','closed') %}1{% else %}1.1{% endif %}"
+    icon_template: mdi:awning
+
+  dep_sonoff_zigbee:
+    friendly_name: Zigbee
+    value_template: "{% if is_state('device_tracker.sonoff_zigbee','home') %}14{% else %}14.1{%endif %}"
+    icon_template: mdi:zigbee
+  dep_zbth_akos:
+    friendly_name: TH Ákos
+    value_template: "1"
+    icon_template: mdi:thermometer
+  dep_zbth_bed:
+    friendly_name: TH háló
+    value_template: "1"
+    icon_template: mdi:thermometer
+  dep_zbth_living:
+    friendly_name: TH nappali
+    value_template: "1"
+    icon_template: mdi:thermometer
+  dep_zbth_reni:
+    friendly_name: TH Reni
+    value_template: "1"
+    icon_template: mdi:thermometer
+  dep_zbdw_akos:
+    friendly_name: DW Ákos
+    value_template: "{% if is_state('binary_sensor.zbdw_akos_opening','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:window-closed-variant
+  dep_zbdw_bed:
+    friendly_name: DW háló
+    value_template: "{% if is_state('binary_sensor.zbdw_bedroom_opening','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:door-sliding
+  dep_zbdw_living:
+    friendly_name: DW nappali
+    value_template: "{% if is_state('binary_sensor.zbdw_living_opening','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:door-sliding
+  dep_zbdw_reni:
+    friendly_name: DW Reni
+    value_template: "{% if is_state('binary_sensor.zbdw_reni_opening','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:window-closed-variant
+  dep_zbso_akos:
+    friendly_name: SO Ákos
+    value_template: "{% if is_state('switch.zbso_akos_switch','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:power-socket-eu
+  dep_zbso_reni:
+    friendly_name: SO Reni
+    value_template: "{% if is_state('switch.zbso_reni_switch','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:power-socket-eu
+  dep_zbmo_safe:
+    friendly_name: MO széf
+    value_template: "1"
+    icon_template: mdi:safe
+  dep_zbmo_tablet:
+    friendly_name: MO tablet
+    value_template: "1"
+    icon_template: mdi:motion
+  dep_zbwl_bath0:
+    friendly_name: WL fürdő0
+    value_template: "{% if is_state('input_boolean.water_leak_bath0_alerted','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:water
+  dep_zbwl_bath1:
+    friendly_name: WL fürdő1
+    value_template: "{% if is_state('input_boolean.water_leak_bath1_alerted','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:water
+  dep_zbwl_badring1:
+    friendly_name: WL fürdő2
+    value_template: "{% if is_state('input_boolean.water_leak_badring1_alerted','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:water
+  dep_zbso_tretakt:
+    friendly_name: SO nappali
+    value_template: "{% if is_state('switch.zbso_tretakt_switch','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:power-socket-eu
+
+  dep_wemo_d1_2:
+    friendly_name: Wemo2
+    value_template: "{% if is_state('device_tracker.wemo_d1_2','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:memory
+  dep_paradox:
+    friendly_name: Paradox
+    value_template: "{% if is_state('sensor.paradox_allapot','armed') %}0.9{% else %}1{%endif %}"
+    icon_template: mdi:shield-home
+
+  dep_b3_heat:
+    friendly_name: fűtés
+    value_template: "{% if is_state('climate.b3_heat','off') %}9{% else %}9.1{%endif %}"
+    icon_template: mdi:radiator
+
+  dep_broadlink_rm4c:
+    friendly_name: RMC4
+    value_template: "{% if is_state('remote.rm4c_remote','on') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:remote
+  dep_yamaha_av:
+    friendly_name: Yamaha A/V
+    value_template: "{% if is_state('switch.yamaha_av_power','off') %}1{% else %}0.9{%endif %}"
+    icon_template: mdi:audio-video
+
+  dep_tanix:
+    friendly_name: Tanix
+    value_template: "{% if is_state('device_tracker.tanix','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:play-network
+  dep_kodi:
+    friendly_name: Kodi
+    value_template: "{% if is_state('media_player.tanix_kodi','playing') %}0.9{% else %}1{%endif %}"
+    icon_template: mdi:kodi
+
+  dep_pana:
+    friendly_name: Pana
+    value_template: >
+      {% if is_state('device_tracker.pana','home') %}
+         {% if is_state('climate.panasonic_nappali','off') %}
+            1
+         {% else %}
+            0.9
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:air-conditioner
+  dep_pana_a:
+    friendly_name: PanaA
+    value_template: >
+      {% if is_state('device_tracker.pana_a','home') %}
+         {% if is_state('climate.panasonic_akos','off') %}
+            1
+         {% else %}
+            0.9
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:air-conditioner
+  dep_pana_r:
+    friendly_name: PanaR
+    value_template: >
+      {% if is_state('device_tracker.pana_r','home') %}
+         {% if is_state('climate.panasonic_reni','off') %}
+            1
+         {% else %}
+            0.9
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:air-conditioner
+  dep_daikin:
+    friendly_name: Daikin
+    value_template: >
+      {% if is_state('device_tracker.daikin','home') %}
+         {% if is_state('climate.daikin_halo','off') %}
+            1
+         {% else %}
+            0.9
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:air-conditioner
+
+  dep_gosund_moso:
+    friendly_name: Gosund mosó
+    value_template: >
+      {% if is_state('device_tracker.gosund_moso','home') %}
+         {% if states('sensor.gosund_moso_w')|int(0) < 3 %}
+            1
+         {% else %}
+            0.9
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:power-socket-eu
+  dep_gosund_mosogato:
+    friendly_name: Gosund mosogató
+    value_template: >
+      {% if is_state('device_tracker.gosund_mosogato','home') %}
+         {% if states('sensor.gosund_mosogato_w')|int(0) < 3 %}
+            1
+         {% else %}
+            0.9
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:power-socket-eu
+  dep_gosund_huto:
+    friendly_name: Gosund hűtő
+    value_template: >
+      {% if is_state('device_tracker.gosund_huto','home') %}
+         {% if states('sensor.gosund_huto_w')|int(0) < 10 %}
+            1
+         {% else %}
+            0.9
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:power-socket-eu
+  dep_gosund_tarolo:
+    friendly_name: Gosund tároló
+    value_template: "{% if is_state('device_tracker.gosund_tarolo','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:power-socket-eu
+
+  dep_camera_backyard:
+    friendly_name: kerti kamera
+    value_template: "{% if is_state('device_tracker.tapo_c310','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:cctv
+  dep_camera_street:
+    friendly_name: utcai kamera
+    value_template: "{% if is_state('device_tracker.tapo_c310_2','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:cctv
+  dep_floureon_camera:
+    friendly_name: Fluoreon kamera
+    value_template: "{% if is_state('device_tracker.floureon_cam','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:cctv
+  dep_hiwatch_hwc_p120:
+    friendly_name: HiWatch kamera
+    value_template: "{% if is_state('device_tracker.hiwatch_hwc_p120','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:cctv
+  dep_camera_wansview:
+    friendly_name: Wansview kamera
+    value_template: "{% if is_state('device_tracker.wansview_cam','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:cctv
+
+  dep_rpi3:
+    friendly_name: RPi3
+    value_template: "{% if is_state('device_tracker.rpi3','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:raspberry-pi
+  dep_rpi4:
+    friendly_name: RPi4
+    value_template: "{% if is_state('device_tracker.rpi4','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:raspberry-pi
+  dep_shelly1_heat:
+    friendly_name: Shelly1 fűtés
+    value_template: >
+      {% if is_state('device_tracker.shelly1_heat','home') %}
+         {% if is_state('switch.shelly1_b3_heat','off') %}
+            1
+         {% else %}
+            0.9
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:electric-switch
+  dep_shinobi:
+    friendly_name: Shinobi
+    value_template: "{% if is_state('shinobi.street','undefined') %}6.1{% else %}6{%endif %}"
+    icon_template: mdi:record-rec
+  dep_music:
+    friendly_name: zene
+    value_template: "{{ states('sensor.dep_yamaha_av')|float + states('sensor.dep_kodi')|float }}"
+    icon_template: mdi:guitar-electric
+  dep_tv:
+    friendly_name: TV
+    value_template: >
+      {% if is_state('device_tracker.lg_webos_tv','home') %}
+         {% if is_state('media_player.lg_smart_tv','off') %}
+            1
+         {% else %}
+            0.9
+         {% endif %}
+      {% else %}
+         1.1
+      {%endif %}
+    icon_template: mdi:television
+  dep_ps4:
+    friendly_name: PS4
+    value_template: "{% if is_state('device_tracker.ps4','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:controller
+  dep_expertbook_eni:
+    friendly_name: Asus ExpertBook Eni
+    value_template: "{% if is_state('device_tracker.expertbook_eni','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:laptop
+  dep_hp_thin:
+    friendly_name: HP Thin t620
+    value_template: "{% if is_state('device_tracker.hp_thin_t620','home') %}19{% else %}19.1{%endif %}"
+    icon_template: mdi:desktop-tower
+
+  dep_person_akos:
+    friendly_name: Ákos
+    value_template: "{% if is_state('person.akos_2','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:face-man
+  dep_person_attila:
+    friendly_name: Attila
+    value_template: "{% if is_state('person.attila','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:face-man
+  dep_person_eniko:
+    friendly_name: Enikő
+    value_template: "{% if is_state('person.eniko','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:face-woman
+  dep_person_reni:
+    friendly_name: Reni
+    value_template: "{% if is_state('person.reni_2','home') %}1{% else %}1.1{%endif %}"
+    icon_template: mdi:face-woman
+
+  dep_aajh482:
+    friendly_name: AAJH482
+    value_template: "{% if is_state('device_tracker.aajh482_parking_location','home') %}1{% else %}1.1{%endif %}"
+    icon_template: phu:toyota
